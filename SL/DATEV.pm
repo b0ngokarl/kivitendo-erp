@@ -1448,7 +1448,7 @@ SQL
 
 
 sub check_valid_length_of_accounts {
-  my ($self) = @_;
+  my ($self, %params) = @_;
 
   my $query = <<"SQL";
   SELECT DISTINCT char_length (accno) FROM chart WHERE charttype='A' AND id in (select chart_id from acc_trans);
@@ -1460,7 +1460,7 @@ SQL
                       " Mismatch length of #1 with length of #2. Please check your account settings. ",
                       $accno_length->[0]->{char_length}, $accno_length->[1]->{char_length}));
   }
-  return 1;
+  return $params{return_length} ? $accno_length->[0]->{char_length} : 1;
 }
 
 sub DESTROY {
