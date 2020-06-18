@@ -2883,6 +2883,7 @@ $self->{texts} = {
   'Server control'              => '',
   'Service'                     => '',
   'Service (typeabbreviation)'  => 'Sv',
+  'Service Date'                => '',
   'Service Items'               => '',
   'Service Number missing!'     => '',
   'Service, assembly or part'   => '',
