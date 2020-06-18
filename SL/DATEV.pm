@@ -1051,6 +1051,9 @@ sub generate_datev_lines {
       if (($transaction->[$haben]->{'duedate'} // '') ne "") {
         $datev_data{belegfeld2} = $transaction->[$haben]->{'duedate'};
       }
+      if (($transaction->[$haben]->{'deliverydate'} // '') ne "") {
+        $datev_data{leistungsdatum} = $transaction->[$haben]->{'deliverydate'};
+      }
     }
     $datev_data{umsatz} = abs($umsatz); # sales invoices without tax have a different sign???
 
