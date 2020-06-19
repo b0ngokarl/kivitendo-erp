@@ -109,7 +109,7 @@ sub _calculate_item {
 
   $data->{invoicediff} += $sellprice * (1 - $item->discount) * $item->qty * $data->{exchangerate} / $item->price_factor - $linetotal if $self->taxincluded;
 
-  my $taxkey     = $part->get_taxkey(date => $self->transdate, is_sales => $data->{is_sales}, taxzone => $self->taxzone_id);
+  my $taxkey     = $part->get_taxkey(date => $self->deliverydate // $self->transdate, is_sales => $data->{is_sales}, taxzone => $self->taxzone_id);
   my $tax_rate   = $taxkey->tax->rate;
   my $tax_amount = undef;
 
