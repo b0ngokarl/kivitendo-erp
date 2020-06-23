@@ -1485,8 +1485,9 @@ sub continue {
 }
 
 sub get_tax_dropdown {
-  my $transdate    = $::form->{transdate} ? DateTime->from_kivitendo($::form->{transdate}) : DateTime->today_local;
-  my @tax_accounts = GL->get_active_taxes_for_chart($::form->{accno_id}, $transdate);
+  my $transdate    = $::form->{transdate}    ? DateTime->from_kivitendo($::form->{transdate}) : DateTime->today_local;
+  my $deliverydate = $::form->{deliverydate} ? DateTime->from_kivitendo($::form->{deliverydate}) : undef;
+  my @tax_accounts = GL->get_active_taxes_for_chart($::form->{accno_id}, $deliverydate // $transdate);
   my $html         = $::form->parse_html_template("gl/update_tax_accounts", { TAX_ACCOUNTS => \@tax_accounts });
 
   print $::form->ajax_response_header, $html;
